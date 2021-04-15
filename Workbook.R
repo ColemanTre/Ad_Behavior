@@ -6,10 +6,17 @@ library(datasets)
 library(bestglm)
 library(caret)
 library(countrycode)
+library(DataExplorer)
+
+
+
 
 
 ## Read in data ##
 data = read.csv('bq-results-20201013-133031-gi2msesmnqa8.csv')
+
+
+
 
 
 ## Simulation ##
@@ -77,6 +84,7 @@ data <- data %>% mutate(log_odds2 = baseline2 + user_effect + advert_effect + in
 data <- data %>% mutate(purchase = rbinom(nrow(.) , 1, prob2))
 
 
+
 ## Feature Engineering ##
 
 ## feature engineer response as positive and negative
@@ -94,6 +102,26 @@ data$userCountry <- as.character(data$userCountry)
 isUS <- ifelse(data$userCountry == "United States of America", 'US', 'Elsewhere')
 
 data <- data %>% mutate(isUS = as.factor(isUS))
+
+
+
+## Variable Selection ##
+str(data)
+select_data <- data %>% select(userBirthYear, promptText, responseType,
+                               intensity, advert, clicked, purchase)
+
+
+  
+  
+  
+## Exploratory Data Analysis ##
+plot_correlation(select_data)
+
+
+
+
+
+
 
 
 ## Modeling ##
