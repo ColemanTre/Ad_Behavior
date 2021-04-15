@@ -83,6 +83,10 @@ data <- data %>% mutate(log_odds2 = baseline2 + user_effect + advert_effect + in
 
 data <- data %>% mutate(purchase = rbinom(nrow(.) , 1, prob2))
 
+#change clicked and purchase to factors
+data$clicked <- as.factor(data$clicked)
+data$purchase <- as.factor(data$purchase)
+
 
 
 ## Feature Engineering ##
@@ -107,8 +111,7 @@ data <- data %>% mutate(isUS = as.factor(isUS))
 
 ## Variable Selection ##
 str(data)
-select_data <- data %>% select(userBirthYear, promptText, responseType,
-                               intensity, advert, clicked, purchase)
+select_data <- data %>% select(intensity, advert, clicked, purchase)
 
 
   
@@ -117,11 +120,35 @@ select_data <- data %>% select(userBirthYear, promptText, responseType,
 ## Exploratory Data Analysis ##
 plot_correlation(select_data)
 
+histogram.clicked <- ggplot(data = data, mapping = aes(x = clicked)) +
+  geom_histogram(stat = "count", fill = 'lightblue') +
+  theme(aspect.ratio = 1)
+histogram.clicked
 
+histogram.purchase <- ggplot(data = data, mapping = aes(x = purchase)) +
+  geom_histogram(stat = "count", fill = 'lightblue')+
+  theme(aspect.ratio = 1)
+histogram.purchase
 
+intensity.v.clicked <- ggplot(data = data, mapping = aes(x = clicked, y = intensity)) +
+  geom_boxplot(fill = "lightblue")+
+  theme(aspect.ratio = 1)
+intensity.v.clicked
 
+intensity.v.purchase <- ggplot(data = data, mapping = aes(x = clicked, y = intensity)) +
+  geom_boxplot(fill = "lightblue")+
+  theme(aspect.ratio = 1)
+intensity.v.purchase
 
+advert.v.purchase <- ggplot(data = data, mapping = aes(x = advert, y = sum(as.numeric(purchase)))) +
+  geom_col(fill = "lightblue")+
+  theme(aspect.ratio = 1)
+advert.v.purchase
 
+advert.v.clicked <- ggplot(data = data, mapping = aes(x = advert, y = sum(as.numeric(clicked)))) +
+  geom_col(fill = "lightblue")+
+  theme(aspect.ratio = 1)
+advert.v.clicked
 
 
 ## Modeling ##
@@ -130,7 +157,6 @@ plot_correlation(select_data)
 # It is a gradient boosted random forest model. There may be better models for your actual data.
 
 
-data$clicked <- as.factor(data$clicked)
 data.train <- data[1:2000000,]
 data.test <- data[2000001:2397242,]
 
