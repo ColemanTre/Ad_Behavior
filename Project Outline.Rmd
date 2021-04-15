@@ -1,0 +1,73 @@
+---
+title: "Untitled"
+author: "Coleman Treadwell"
+date: "1/19/2021"
+output: html_document
+---
+
+
+###Outline
+
+#Set Expectations
+#1. End Goal <- R Package??
+#2. What kind of model/analysis do we need to reach that end goal? What model will perform best? How do we measure performance?
+#3. What data do I need to accomplish this? <- Determine response variable, determining other variables to consider. Timeline of data collected.
+#4. Where do I get the data? <- Scraping? CSV? API? Manual Colllection?
+#5 Timeline <- How long will each step take?
+
+
+#Comms with client
+-give them a chance to reach for the stars, listen and identify ideas that are attainable
+-share back with them
+
+opinion analytics - looking at peoples opinions for live events. Intimate groups and mass groups
+
+assessment - track it - can we assess what is happening
+betterment - find the correlation
+If they got an ad, did they view it?
+Visualization
+
+Do with fake data, but make system that can self-actualize and update with live data. INtensity level at which they voted
+
+
+
+Jan 11- Apr 14
+
+###Phase 1 - assessment - Feb 26
+
+Phase 1 is data gathering and simulation. 
+
+1. Simulate data for engagement with ads
+- is there any data right now that we can use to build predictions (i.e. customers interacting with ads)? If so, we can do multiple linear regression and make predictions. 
+- simulate data for various hypothetical companies and the interactions (download coupon, make purchase, subscribe)
+
+complete phase 1 by Feb 26
+
+###Phase 2 - betterment - Mar 19
+
+Phase 2 is modeling and making usable predictions.
+
+Under what circumstances are customers most likely to interact with ads and/or make purchases?
+
+Logistic Regression - a. response variable: engagement with ads
+                         predictor variables: intensity level, date/time, user birth year, user location, sport, 
+                                              moment (touchdown, dunk, hole-in-one, etc.), offering type
+                                   
+                      b. response variable: made a purchase
+                         predictor variables: intensity level, date/time, user birth year, user location, sport,
+                                              moment (touchdown, dunk, hole-in-one, etc.), offering type
+
+Use simulated data from phase 1
+
+Complete phase 2 by Mar 19
+
+###Phase 3 - visualization - Apr 16
+
+Phase 3 is making an interactive application using the models and predictions created in phase 2.
+
+Make an app in Shiny that allows the user to select a sport/event and see which factors caused the biggest increase in the number of ad interactions and purchases made.
+
+Complete phase 3 by Apr 16
+
+
+
